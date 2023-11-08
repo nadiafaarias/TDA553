@@ -28,14 +28,17 @@ public class Volvo240 extends Car{
 
     // TODO fix this method according to lab pm
     public void gas(double amount){
-        if (amount < 0 || amount > 1){
-            throw new IllegalArgumentException("Amount out of range");
+        if (amount >= 0 || amount <= 1){
+            incrementSpeed(amount);
         }
-        incrementSpeed(amount);
+
     }
 
     // TODO fix this method according to lab pm
     public void brake(double amount){
-        decrementSpeed(amount);
+        if (amount >= 0 || amount <= 1) {
+            decrementSpeed(amount);
+        }
+
     }
 }
