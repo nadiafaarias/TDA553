@@ -29,10 +29,52 @@ class Volvo240Test {
     public void getModelName() {
         assertEquals("Volvo240", volvo240.modelName);
     }
+
+
+
+
     @Test
-    public void gas() {
-        volvo240.gas(10);
-        assertEquals(10, volvo240.currentSpeed);
+    public void  gasZero() {
+        volvo240.gas(0);
+        assertEquals(0, volvo240.currentSpeed);
+    }
+    @Test
+    public void gasOne() {
+        volvo240.gas(1);
+        assertEquals(1.25, volvo240.currentSpeed);
+    }
+    @Test
+    public void gasNegative() {
+        volvo240.gas(-1);
+        assertEquals(0, volvo240.currentSpeed);
+    }
+    @Test
+    public void gasPositive() {
+        volvo240.gas(2);
+        assertEquals(0, volvo240.currentSpeed);
+    }
+    @Test
+    public void brakeZero() {
+        volvo240.brake(0);
+        assertEquals(0, volvo240.currentSpeed);
     }
 
+    @Test
+    public void brakeOne() {
+        volvo240.currentSpeed = 10;
+        volvo240.brake(1);
+        assertEquals(8.75, volvo240.currentSpeed);
+    }
+    @Test
+    public void brakeNegative() {
+        volvo240.brake(-1);
+        assertEquals(0, volvo240.currentSpeed);
+    }
+
+    @Test
+    public void brakeLargerThanOne() {
+        volvo240.currentSpeed = 10;
+        volvo240.brake(2);
+        assertEquals(10, volvo240.currentSpeed);
+    }
 }

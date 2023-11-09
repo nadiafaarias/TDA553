@@ -72,10 +72,10 @@ import java.awt.*;
         }
 
 
-        public int getNrDoors(){
+        protected int getNrDoors(){
             return nrDoors;
         }
-        public double getEnginePower(){
+        protected double getEnginePower(){
             return enginePower;
         }
 
@@ -83,11 +83,11 @@ import java.awt.*;
             return currentSpeed;
         }
 
-        public Color getColor(){
+        protected Color getColor(){
             return color;
         }
 
-        public void setColor(Color clr){
+        protected void setColor(Color clr){
             color = clr;
         }
 
