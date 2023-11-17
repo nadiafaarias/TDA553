@@ -4,41 +4,41 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CarRepareShopTest {
+class CarRepairShopTest {
 
     @Test
     public void createACarShop() {
-        CarRepareShop<Car> carShop = new CarRepareShop<>(10);
+        CarRepairShop<Car> carShop = new CarRepairShop<>(10);
         assertEquals(10, carShop.maxAmountCars);
     }
 
     @Test
     public void createAVolvoShop() {
-        CarRepareShop<Volvo240> volvoShop = new CarRepareShop<>(7);
+        CarRepairShop<Volvo240> volvoShop = new CarRepairShop<>(7);
         assertEquals(7, volvoShop.maxAmountCars);
     }
 
     @Test
     public void turnInTooManyCar() {
-        CarRepareShop<Car> carCarRepareShop = new CarRepareShop<>(1);
+        CarRepairShop<Car> carCarRepairShop = new CarRepairShop<>(1);
         Car car = new Car();
         Scania scania = new Scania();
-        carCarRepareShop.turnInCar(car);
-        carCarRepareShop.turnInCar(scania);
-        assertEquals(1, carCarRepareShop.carsInShop.size());
+        carCarRepairShop.turnInCar(car);
+        carCarRepairShop.turnInCar(scania);
+        assertEquals(1, carCarRepairShop.carsInShop.size());
     }
     @Test
     public void turnInCar() {
-        CarRepareShop<Car> carCarRepareShop = new CarRepareShop<>(5);
+        CarRepairShop<Car> carCarRepairShop = new CarRepairShop<>(5);
         Car car = new Car();
-        carCarRepareShop.turnInCar(car);
-        assertEquals(1, carCarRepareShop.carsInShop.size());
+        carCarRepairShop.turnInCar(car);
+        assertEquals(1, carCarRepairShop.carsInShop.size());
 
     }
 
     @Test
     public void removeNonExistingCar() {
-        CarRepareShop<Trucks> truckShop = new CarRepareShop<>(3);
+        CarRepairShop<Trucks> truckShop = new CarRepairShop<>(3);
         Scania scania = new Scania();
         Trucks trucks = new Trucks();
         truckShop.turnInCar(trucks);
@@ -49,7 +49,7 @@ class CarRepareShopTest {
     }
     @Test
     public void removeCar() {
-        CarRepareShop<Carrier> carrierShop = new CarRepareShop<>(3);
+        CarRepairShop<Carrier> carrierShop = new CarRepairShop<>(3);
         Carrier carrier1 = new Carrier();
         Carrier carrier2 = new Carrier();
         carrierShop.turnInCar(carrier1);

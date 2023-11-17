@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 
-public class CarRepareShop<A extends Car> {
+public class CarRepairShop<A extends Car> {
 
     public int maxAmountCars;
     public ArrayList<A> carsInShop;
 
-    public CarRepareShop(int numberCars){
+    public CarRepairShop(int numberCars){
         maxAmountCars = numberCars;
         carsInShop = new ArrayList<>();
     }
