@@ -21,21 +21,21 @@ class CarrierTest {
 
     @Test
     public void tooFarFromCarrierX() {
-        Car car = new Car();
+        Car car = new Volvo240();
         car.xCoordinate = 3;
         assertFalse(carrier.distanceFromCarrier(car));
     }
 
     @Test
     public void tooFarFromCarrierY() {
-        Car car = new Car();
+        Car car = new Volvo240();
         car.yCoordinate = 3;
         assertFalse(carrier.distanceFromCarrier(car));
     }
 
     @Test
     public void distanceFromCarrierTrue() {
-        Car car = new Car();
+        Car car = new Saab95();
         car.xCoordinate = 1.5;
         assertTrue(carrier.distanceFromCarrier(car));
     }
@@ -63,14 +63,14 @@ class CarrierTest {
 
     @Test
     public void testLoadCarWhilePlatformUp() {
-        Car car = new Car();
+        Car car = new Volvo240();
         carrier.loadCar(car);
         assertEquals(0, carrier.listOfCars.size());
     }
 
     @Test
     public void testLoadCarToFarAway() {
-        Car car = new Car();
+        Car car = new Volvo240();
         car.xCoordinate = 5;
         carrier.changePlatform();
         carrier.loadCar(car);
@@ -79,17 +79,17 @@ class CarrierTest {
 
     @Test
     public void testLoadToManyCars() {
-        Car car1 = new Car();
-        Car car2 = new Car();
-        Car car3 = new Car();
-        Car car4 = new Car();
-        Car car5 = new Car();
-        Car car6 = new Car();
-        Car car7 = new Car();
-        Car car8 = new Car();
-        Car car9 = new Car();
-        Car car10 = new Car();
-        Car car11 = new Car();
+        Car car1 = new Saab95();
+        Car car2 = new Volvo240();
+        Car car3 = new Saab95();
+        Car car4 = new Volvo240();
+        Car car5 = new Saab95();
+        Car car6 = new Volvo240();
+        Car car7 = new Saab95();
+        Car car8 = new Volvo240();
+        Car car9 = new Saab95();
+        Car car10 = new Volvo240();
+        Car car11 = new Saab95();
         carrier.changePlatform();
         carrier.loadCar(car1);
         carrier.loadCar(car2);
@@ -123,7 +123,7 @@ class CarrierTest {
 
     @Test
     public void testUnloadingCarWhilePlatformUp() {
-        Car car = new Car();
+        Car car = new Saab95();
         carrier.changePlatform();
         carrier.loadCar(car);
         carrier.changePlatform();
@@ -133,8 +133,8 @@ class CarrierTest {
 
     @Test
     public void unloadCorrectCar() {
-        Car car1 = new Car();
-        Car car2 = new Car();
+        Car car1 = new Volvo240();
+        Car car2 = new Saab95();
         carrier.changePlatform();
         carrier.loadCar(car1);
         carrier.loadCar(car2);
@@ -145,7 +145,7 @@ class CarrierTest {
 
     @Test
     public void unloadedCarsCoordinates() {
-        Car car = new Car();
+        Car car = new Saab95();
         carrier.changePlatform();
         carrier.loadCar(car);
         carrier.unLoadCar();
@@ -157,8 +157,8 @@ class CarrierTest {
     @Test
     public void driveCarrier() {
         carrier.changePlatform();
-        Car car1 = new Car();
-        Car car2 = new Car();
+        Car car1 = new Volvo240();
+        Car car2 = new Saab95();
         carrier.loadCar(car1);
         carrier.loadCar(car2);
         carrier.changePlatform();

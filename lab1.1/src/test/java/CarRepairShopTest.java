@@ -21,7 +21,7 @@ class CarRepairShopTest {
     @Test
     public void turnInTooManyCar() {
         CarRepairShop<Car> carCarRepairShop = new CarRepairShop<>(1);
-        Car car = new Car();
+        Volvo240 car = new Volvo240();
         Scania scania = new Scania();
         carCarRepairShop.turnInCar(car);
         carCarRepairShop.turnInCar(scania);
@@ -30,7 +30,7 @@ class CarRepairShopTest {
     @Test
     public void turnInCar() {
         CarRepairShop<Car> carCarRepairShop = new CarRepairShop<>(5);
-        Car car = new Car();
+        Saab95 car = new Saab95();
         carCarRepairShop.turnInCar(car);
         assertEquals(1, carCarRepairShop.carsInShop.size());
 

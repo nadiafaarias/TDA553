@@ -25,10 +25,4 @@ public class Scania extends Trucks {
             platform = Math.max(platform - degrees, 0);
         }
     }
-    public void gas(double amount){
-        if (platform == 0){
-            incrementSpeed(amount);
-        }
-
-    }
 }

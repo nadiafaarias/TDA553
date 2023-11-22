@@ -10,7 +10,7 @@ class CarTest {
 
     @BeforeEach
     public void createInstance() {
-        car = new Car();
+        car = new Volvo240();
     }
 
     @Test
