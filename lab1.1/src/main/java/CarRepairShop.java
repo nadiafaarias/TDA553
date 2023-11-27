@@ -2,8 +2,16 @@ import java.util.ArrayList;
 
 public class CarRepairShop<A extends Car> {
 
-    public int maxAmountCars;
-    public ArrayList<A> carsInShop;
+    private int maxAmountCars;
+    private ArrayList<A> carsInShop;
+
+    public int getMaxAmountCars() {
+        return maxAmountCars;
+    }
+
+    public ArrayList<A> getCarsInShop() {
+        return carsInShop;
+    }
 
     public CarRepairShop(int numberCars){
         maxAmountCars = numberCars;

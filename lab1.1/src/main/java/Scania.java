@@ -1,6 +1,8 @@
 import java.awt.*;
 
 public class Scania extends Trucks {
+
+    private double platform;
     public Scania(){
         nrDoors = 2;
         color = Color.pink;
@@ -23,6 +25,12 @@ public class Scania extends Trucks {
     public void lowerPlatformAngle(double degrees) {
         if (currentSpeed == 0) {
             platform = Math.max(platform - degrees, 0);
+        }
+    }
+
+    public void gas(double amount) {
+        if (platform == 0) {
+            incrementSpeed(amount);
         }
     }
 }

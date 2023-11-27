@@ -9,13 +9,13 @@ class CarRepairShopTest {
     @Test
     public void createACarShop() {
         CarRepairShop<Car> carShop = new CarRepairShop<>(10);
-        assertEquals(10, carShop.maxAmountCars);
+        assertEquals(10, carShop.getMaxAmountCars());
     }
 
     @Test
     public void createAVolvoShop() {
         CarRepairShop<Volvo240> volvoShop = new CarRepairShop<>(7);
-        assertEquals(7, volvoShop.maxAmountCars);
+        assertEquals(7, volvoShop.getMaxAmountCars());
     }
 
     @Test
@@ -25,14 +25,14 @@ class CarRepairShopTest {
         Scania scania = new Scania();
         carCarRepairShop.turnInCar(car);
         carCarRepairShop.turnInCar(scania);
-        assertEquals(1, carCarRepairShop.carsInShop.size());
+        assertEquals(1, carCarRepairShop.getCarsInShop().size());
     }
     @Test
     public void turnInCar() {
         CarRepairShop<Car> carCarRepairShop = new CarRepairShop<>(5);
         Saab95 car = new Saab95();
         carCarRepairShop.turnInCar(car);
-        assertEquals(1, carCarRepairShop.carsInShop.size());
+        assertEquals(1, carCarRepairShop.getCarsInShop().size());
 
     }
 
@@ -45,7 +45,7 @@ class CarRepairShopTest {
         truckShop.reclaimCar(scania);
         ArrayList<Trucks> testList = new ArrayList<>();
         testList.add(trucks);
-        assertEquals(truckShop.carsInShop, testList);
+        assertEquals(truckShop.getCarsInShop(), testList);
     }
     @Test
     public void removeCar() {
@@ -57,7 +57,7 @@ class CarRepairShopTest {
         carrierShop.reclaimCar(carrier1);
         ArrayList<Carrier> testList = new ArrayList<>();
         testList.add(carrier2);
-        assertEquals(carrierShop.carsInShop, testList);
+        assertEquals(carrierShop.getCarsInShop(), testList);
     }
 
 }

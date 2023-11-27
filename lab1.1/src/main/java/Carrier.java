@@ -2,19 +2,29 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Carrier extends Trucks{
-    public int maxNumberCars = 10;
-    public ArrayList <Car> listOfCars = new ArrayList<>();
+    private final int maxNumberCars = 10;
+
+    private boolean platformDown;
+    private ArrayList <Car> listOfCars = new ArrayList<>();
     public Carrier() {
         nrDoors = 2;
         color = Color.green;
         modelName = "Carrier";
         enginePower = 80;
-        platform = 0;
+        platformDown = false;
         stopEngine();
     }
 
-    public double getPlatformPosition() {
-        return platform;
+    public int getMaxNumberCars() {
+        return maxNumberCars;
+    }
+
+    public ArrayList<Car> getListOfCars() {
+        return listOfCars;
+    }
+
+    public boolean getPlatformPosition() {
+        return platformDown;
     }
 
     public boolean distanceFromCarrier (Car other) {
@@ -30,12 +40,12 @@ public class Carrier extends Trucks{
     }
     public void changePlatform() {
         if (currentSpeed == 0) {
-            platform = Math.abs(platform - 70);
+            platformDown = !platformDown;
         }
     }
 
     public void loadCar(Car car) {
-        if ((platform == 70 && distanceFromCarrier(car)) &&
+        if ((platformDown && distanceFromCarrier(car)) &&
                 (listOfCars.size() < maxNumberCars) && car.getClass() != Carrier.class) {
             listOfCars.add(car);
             car.xCoordinate = xCoordinate;
@@ -44,7 +54,7 @@ public class Carrier extends Trucks{
     }
 
     public void unLoadCar() {
-        if(platform == 70) {
+        if(platformDown) {
             Car other = listOfCars.get(listOfCars.size() - 1);
             other.xCoordinate = xCoordinate + 1;
             other.yCoordinate = yCoordinate - 1;
@@ -52,12 +62,31 @@ public class Carrier extends Trucks{
         }
     }
 
-    public void driveCarrier() {
-        move();
+    public void move() {
+        switch (position) {
+            case "North":
+                yCoordinate += currentSpeed;
+                break;
+            case "South":
+                yCoordinate -= currentSpeed;
+                break;
+            case "West":
+                xCoordinate -= currentSpeed;
+                break;
+            case "East":
+                xCoordinate += currentSpeed;
+                break;
+        }
         for (Car car : listOfCars) {
             car.xCoordinate = xCoordinate;
             car.yCoordinate = yCoordinate;
             car.position = position;
+        }
+    }
+
+    public void gas(double amount) {
+        if (!platformDown) {
+            incrementSpeed(amount);
         }
     }
 

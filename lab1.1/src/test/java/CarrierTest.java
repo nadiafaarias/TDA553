@@ -1,8 +1,6 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class CarrierTest {
@@ -15,7 +13,7 @@ class CarrierTest {
 
     @Test
     public void testGetPlatformPosition() {
-        assertEquals(0, carrier.getPlatformPosition());
+        assertFalse(carrier.getPlatformPosition());
     }
 
 
@@ -44,20 +42,20 @@ class CarrierTest {
     public void changePlatformTrue() {
         carrier.currentSpeed = 0;
         carrier.changePlatform();
-        assertEquals(70, carrier.platform);
+        assertTrue(carrier.getPlatformPosition());
     }
     @Test
     public void changePlatformWhileMoving() {
         carrier.currentSpeed = 10;
         carrier.changePlatform();
-        assertEquals(0, carrier.platform);
+        assertFalse(carrier.getPlatformPosition());
     }
     @Test
     public void changePlatformFalse() {
         carrier.currentSpeed = 0;
-        carrier.platform = 70;
         carrier.changePlatform();
-        assertEquals(0, carrier.platform);
+        carrier.changePlatform();
+        assertFalse(carrier.getPlatformPosition());
     }
 
 
@@ -65,7 +63,7 @@ class CarrierTest {
     public void testLoadCarWhilePlatformUp() {
         Car car = new Volvo240();
         carrier.loadCar(car);
-        assertEquals(0, carrier.listOfCars.size());
+        assertEquals(0, carrier.getListOfCars().size());
     }
 
     @Test
@@ -74,7 +72,7 @@ class CarrierTest {
         car.xCoordinate = 5;
         carrier.changePlatform();
         carrier.loadCar(car);
-        assertEquals(0, carrier.listOfCars.size());
+        assertEquals(0, carrier.getListOfCars().size());
     }
 
     @Test
@@ -102,7 +100,7 @@ class CarrierTest {
         carrier.loadCar(car9);
         carrier.loadCar(car10);
         carrier.loadCar(car11);
-        assertEquals(10, carrier.listOfCars.size());
+        assertEquals(10, carrier.getListOfCars().size());
     }
 
     @Test
@@ -110,7 +108,7 @@ class CarrierTest {
         Carrier carrier1 = new Carrier();
         carrier.changePlatform();
         carrier.loadCar(carrier1);
-        assertEquals(0, carrier.listOfCars.size());
+        assertEquals(0, carrier.getListOfCars().size());
     }
 
     @Test
@@ -118,7 +116,7 @@ class CarrierTest {
         Volvo240 volvo240 = new Volvo240();
         carrier.changePlatform();
         carrier.loadCar(volvo240);
-        assertEquals(1, carrier.listOfCars.size());
+        assertEquals(1, carrier.getListOfCars().size());
     }
 
     @Test
@@ -128,7 +126,7 @@ class CarrierTest {
         carrier.loadCar(car);
         carrier.changePlatform();
         carrier.unLoadCar();
-        assertEquals(1, carrier.listOfCars.size());
+        assertEquals(1, carrier.getListOfCars().size());
     }
 
     @Test
@@ -139,8 +137,8 @@ class CarrierTest {
         carrier.loadCar(car1);
         carrier.loadCar(car2);
         carrier.unLoadCar();
-        assertEquals(car1, carrier.listOfCars.get(0));
-        assertEquals(1, carrier.listOfCars.size());
+        assertEquals(car1, carrier.getListOfCars().get(0));
+        assertEquals(1, carrier.getListOfCars().size());
     }
 
     @Test
@@ -163,7 +161,7 @@ class CarrierTest {
         carrier.loadCar(car2);
         carrier.changePlatform();
         carrier.gas(2);
-        carrier.driveCarrier();
+        carrier.move();
         assertEquals(carrier.xCoordinate, car1.xCoordinate);
         assertEquals(carrier.yCoordinate, car1.yCoordinate );
         assertEquals(carrier.xCoordinate, car2.xCoordinate);
@@ -172,12 +170,12 @@ class CarrierTest {
     @Test
     public void testMovingCar() {
         carrier.gas(2);
-        carrier.driveCarrier();
+        carrier.move();
         assertEquals(1.6, carrier.yCoordinate);
     }
     @Test
     public void gasWhilePlatformDown() {
-        carrier.platform = 70;
+        carrier.changePlatform();
         carrier.gas(1);
         assertEquals(0, carrier.currentSpeed);
     }
