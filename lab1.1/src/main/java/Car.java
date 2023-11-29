@@ -18,6 +18,18 @@ import java.awt.*;
         protected Color color; // Color of the car
         protected String modelName; // The car model name
 
+
+        public double getXCoordinate() {
+            return xCoordinate;
+        }
+
+        public double getYCoordinate() {
+            return yCoordinate;
+        }
+
+        public String getPosition() {
+            return position;
+        }
         public void move() {
             switch (position) {
                 case "North":
