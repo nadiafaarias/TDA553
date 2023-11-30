@@ -83,6 +83,23 @@ import java.awt.*;
             }
         }
 
+        public void invertPosition() {
+            switch (position) {
+                case "North":
+                    position = "South";
+                    break;
+                case "South":
+                    position = "North";
+                    break;
+                case "West":
+                    position = "East";
+                    break;
+                case "East":
+                    position = "West";
+                    break;
+            }
+        }
+
 
         protected int getNrDoors(){
             return nrDoors;

@@ -14,7 +14,7 @@ public class CarController {
     // member fields:
 
     // The delay (ms) corresponds to 20 updates a sec (hz)
-    private final int delay = 50;
+    private final int delay = 8;
     // The timer is started with a listener (see below) that executes the statements
     // each step between delays.
     private Timer timer = new Timer(delay, new TimerListener());
@@ -22,17 +22,21 @@ public class CarController {
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
     // A list of cars, modify if needed
-    ArrayList<Car> cars = new ArrayList<>();
+    public ArrayList<Car> cars = new ArrayList<>();
+    public static Saab95 saab = new Saab95();
+    public static Volvo240 volvo = new Volvo240();
+    public static Scania scania = new Scania();
 
     //methods:
 
     public static void main(String[] args) {
         // Instance of this class
         CarController cc = new CarController();
-
-        cc.cars.add(new Saab95());
-        cc.cars.add(new Volvo240());
-        cc.cars.add(new Scania());
+        cc.cars.add(saab);
+        cc.cars.add(volvo);
+        cc.cars.add(scania);
+        saab.yCoordinate = 100;
+        scania.yCoordinate = 200;
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -47,37 +51,16 @@ public class CarController {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (Car car : cars) {
-                if (car.getYCoordinate() < 500) {
+                if (car.getYCoordinate() < 500 && car.getYCoordinate() > 0) {
                     car.move();
-                    int x = (int) Math.round(car.getXCoordinate());
-                    int y = (int) Math.round(car.getYCoordinate());
-                    frame.drawPanel.moveit(x, y);
-                    // repaint() calls the paintComponent method of the panel
                     frame.drawPanel.repaint();
                 }
                 else {
-                    System.out.println(car.yCoordinate);
-                    switch (car.position) {
-                        case "North":
-                            car.position = "South";
-                            break;
-                        case "South":
-                            car.position = "North";
-                            break;
-                        case "West":
-                            car.position = "East";
-                            break;
-                        case "East":
-                            car.position = "West";
-                            break;
-                    }
+                    car.invertPosition();
                     car.move();
-                    int x = (int) Math.round(car.getXCoordinate());
-                    int y = (int) Math.round(car.getYCoordinate());
-                    frame.drawPanel.moveit(x, y);
-                    // repaint() calls the paintComponent method of the panel
-                    frame.drawPanel.repaint();
                 }
+                car.move();
+                frame.drawPanel.repaint();
             }
         }
     }
@@ -101,7 +84,44 @@ public class CarController {
         for (Car car : cars) {
             if (car instanceof Saab95) {
                 ((Saab95) car).setTurboOn();
+
             }
+        }
+    }
+
+    void turboOff() {
+        for (Car car : cars) {
+            if (car instanceof Saab95) {
+                ((Saab95) car).setTurboOff();
+            }
+        }
+    }
+
+    void liftBedUp() {
+        for (Car car : cars) {
+            if (car instanceof Scania) {
+                ((Scania) car).raisePlatformAngle(5);
+            }
+        }
+    }
+
+    void lowerBed() {
+        for (Car car : cars) {
+            if (car instanceof Scania) {
+                ((Scania) car).lowerPlatformAngle(5);
+            }
+        }
+    }
+
+    void startAllCars() {
+        for (Car car : cars) {
+            car.startEngine();
+        }
+    }
+
+    void stopAllCars() {
+        for (Car car : cars) {
+            car.stopEngine();
         }
     }
 }
