@@ -1,7 +1,10 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -10,14 +13,17 @@ import javax.swing.*;
 public class DrawPanel extends JPanel{
 
     // Just a single image, TODO: Generalize
-    BufferedImage volvoImage;
-    BufferedImage scaniaImage;
-    BufferedImage saabImage;
+    BufferedImage volvo240;
+    BufferedImage scania;
+    BufferedImage saab95;
 
-    void moveIt(int x, int y, Car car) {
+    Map<String, BufferedImage> imageList = new HashMap<>();
+
+
+   /* void moveIt(int x, int y, Car car) {
         Point point = new Point(x, y);
         CarController.carPoints.put(car, point);
-    }
+    }*/
 
 
     // Initializes the panel and reads the images
@@ -33,9 +39,12 @@ public class DrawPanel extends JPanel{
 
             // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
             // if you are starting in IntelliJ.
-            volvoImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
-            scaniaImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg"));
-            saabImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg"));
+            volvo240 = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
+            scania = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg"));
+            saab95 = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg"));
+            imageList.put("Volvo240", volvo240);
+            imageList.put("Scania", scania);
+            imageList.put("Saab95", saab95);
         } catch (IOException ex)
         {
             ex.printStackTrace();
@@ -48,8 +57,13 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(volvoImage, CarController.carPoints.get(CarController.volvo).x, CarController.carPoints.get(CarController.volvo).y, null);
-        g.drawImage(scaniaImage, CarController.carPoints.get(CarController.scania).x, CarController.carPoints.get(CarController.scania).y, null);
-        g.drawImage(saabImage, CarController.carPoints.get(CarController.saab).x, CarController.carPoints.get(CarController.saab).y, null); // see javadoc for more info on the parameters
+        for(Car car : CarController.cars) {
+            for (String key : imageList.keySet()) {
+                if(Objects.equals(key, car.modelName)) {
+                    g.drawImage(imageList.get(key), (int) Math.ceil(car.getXCoordinate()), (int) Math.ceil(car.getYCoordinate()),null);
+                }
+            }
+
+        }
     }
 }
