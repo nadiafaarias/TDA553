@@ -14,6 +14,11 @@ public class DrawPanel extends JPanel{
     BufferedImage scaniaImage;
     BufferedImage saabImage;
 
+    void moveIt(int x, int y, Car car) {
+        Point point = new Point(x, y);
+        CarController.carPoints.put(car, point);
+    }
+
 
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y) {
@@ -43,8 +48,8 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(volvoImage, (int) Math.round(CarController.volvo.getXCoordinate()), (int) Math.round(CarController.volvo.getYCoordinate()), null);
-        g.drawImage(scaniaImage, (int) Math.round(CarController.scania.getXCoordinate()), (int) Math.round(CarController.scania.getYCoordinate()), null);
-        g.drawImage(saabImage, (int) Math.round(CarController.saab.getXCoordinate()), (int) Math.round(CarController.saab.getYCoordinate()), null); // see javadoc for more info on the parameters
+        g.drawImage(volvoImage, CarController.carPoints.get(CarController.volvo).x, CarController.carPoints.get(CarController.volvo).y, null);
+        g.drawImage(scaniaImage, CarController.carPoints.get(CarController.scania).x, CarController.carPoints.get(CarController.scania).y, null);
+        g.drawImage(saabImage, CarController.carPoints.get(CarController.saab).x, CarController.carPoints.get(CarController.saab).y, null); // see javadoc for more info on the parameters
     }
 }
