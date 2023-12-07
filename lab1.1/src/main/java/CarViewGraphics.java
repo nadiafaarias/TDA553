@@ -9,8 +9,6 @@ public class CarViewGraphics extends JFrame{
     final int X = 800;
     final int Y = 800;
 
-    CarController carC;
-
     //DrawPanel drawPanel = new DrawPanel(X, Y-240);
 
     JPanel controlPanel = new JPanel();
