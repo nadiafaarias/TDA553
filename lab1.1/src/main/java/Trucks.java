@@ -4,4 +4,5 @@ public class Trucks extends Car {
         return enginePower * 0.01;
     }
 
+
 }

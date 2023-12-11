@@ -14,18 +14,12 @@ class TimerListener implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         for (Car car : CarController.cars) {
-            if (car.getYCoordinate() < 500 && car.getYCoordinate() > 0) {
+            if (car.getXCoordinate() < 700 && car.getXCoordinate() > 0) {
                 car.move();
-                int x = (int) Math.round(car.getXCoordinate());
-                int y = (int) Math.round(car.getYCoordinate());
-                //CarApplication.frame.drawPanel.moveIt(x, y, car);
                 CarApplication.frame.drawPanel.repaint();
             } else {
                 car.invertPosition();
                 car.move();
-                int x = (int) Math.round(car.getXCoordinate());
-                int y = (int) Math.round(car.getYCoordinate());
-                //CarApplication.frame.drawPanel.moveIt(x, y, car);
             }
             car.move();
             CarApplication.frame.drawPanel.repaint();

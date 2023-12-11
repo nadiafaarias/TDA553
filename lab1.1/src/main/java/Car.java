@@ -1,6 +1,6 @@
 import java.awt.*;
 
-    public abstract class Car implements Movable{
+    public abstract class  Car implements Movable{
 
         protected double xCoordinate;
         protected double yCoordinate;
@@ -9,7 +9,7 @@ import java.awt.*;
         protected Car(){
             xCoordinate = 0;
             yCoordinate = 0;
-            position = "North";
+            position = "East";
         }
 
         protected int nrDoors; // Number of doors on the car
@@ -99,6 +99,8 @@ import java.awt.*;
                     break;
             }
         }
+
+
 
 
         protected int getNrDoors(){

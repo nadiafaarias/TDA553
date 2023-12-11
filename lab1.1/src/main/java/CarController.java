@@ -1,11 +1,8 @@
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Hashtable;
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -22,17 +19,16 @@ public class CarController {
     // each step between delays.
 
     DrawPanel drawPanel;
+    ButtonModel buttonModel = new ButtonModel();
 
     public CarController(String framename, CarViewGraphics cvg, int X, int Y) {
         drawPanel = new DrawPanel(X, Y);
         cvg.initComponents(framename, drawPanel);
-        cars.add(volvo);
-        cars.add(saab);
-        cars.add(scania);
+        cars.add(Volvo240.createCar());
+        cars.add(Saab95.createCar());
+        cars.add(Scania.createCar());
         int y = 0;
         for (Car car : cars) {
-            //Point point = new Point(0,y);
-            //carPoints.put(car,point);
             car.yCoordinate = y;
             y += 100;
         }
@@ -41,56 +37,68 @@ public class CarController {
         cvg.gasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gas(cvg.gasAmount);
+                buttonModel.gas(cvg.gasAmount);
             }
         });
 
         cvg.brakeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                brake(cvg.gasAmount);
+                buttonModel.brake(cvg.gasAmount);
             }
         });
 
         cvg.turboOnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                turboOn();
+                buttonModel.turboOn();
             }
         });
 
         cvg.turboOffButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                turboOff();
+                buttonModel.turboOff();
             }
         });
 
         cvg.liftBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                liftBedUp();
+                buttonModel.liftBedUp();
             }
         });
 
         cvg.lowerBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                lowerBed();
+                buttonModel.lowerBed();
             }
         });
 
         cvg.startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                startAllCars();
+                buttonModel.startAllCars();
             }
         });
 
         cvg.stopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                stopAllCars();
+                buttonModel.stopAllCars();
+            }
+        });
+        cvg.addCar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                buttonModel.addCar(cvg.carModel);
+            }
+        });
+        cvg.removeCar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                buttonModel.removeCar();
             }
         });
     }
@@ -100,69 +108,6 @@ public class CarController {
 
     // A list of cars, modify if needed
     public static ArrayList<Car> cars = new ArrayList<>();
-    Saab95 saab = new Saab95();
-    Volvo240 volvo = new Volvo240();
-    Scania scania = new Scania();
 
-    //public Dictionary<Car, Point> carPoints = new Hashtable<>();
 
-    // Calls the gas method for each car once
-    void gas(int amount) {
-        double gas = ((double) amount) / 100;
-        for (Car car : cars) {
-            car.gas(gas);
-        }
-    }
-
-    void brake(int amount) {
-        double brake = ((double) amount) / 100;
-        for (Car car : cars) {
-            car.brake(brake);
-        }
-    }
-
-    void turboOn() {
-        for (Car car : cars) {
-            if (car instanceof Saab95) {
-                ((Saab95) car).setTurboOn();
-
-            }
-        }
-    }
-
-    void turboOff() {
-        for (Car car : cars) {
-            if (car instanceof Saab95) {
-                ((Saab95) car).setTurboOff();
-            }
-        }
-    }
-
-    void liftBedUp() {
-        for (Car car : cars) {
-            if (car instanceof Scania) {
-                ((Scania) car).raisePlatformAngle(5);
-            }
-        }
-    }
-
-    void lowerBed() {
-        for (Car car : cars) {
-            if (car instanceof Scania) {
-                ((Scania) car).lowerPlatformAngle(5);
-            }
-        }
-    }
-
-    void startAllCars() {
-        for (Car car : cars) {
-            car.startEngine();
-        }
-    }
-
-    void stopAllCars() {
-        for (Car car : cars) {
-            car.stopEngine();
-        }
-    }
 }

@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Volvo240 extends Car{
+public class Volvo240 extends Car implements CarFactory{
 
     private final double trimFactor = 1.25;
 
@@ -10,6 +10,10 @@ public class Volvo240 extends Car{
         enginePower = 100;
         modelName = "Volvo240";
         stopEngine();
+    }
+
+    public static Car createCar() {
+        return new Volvo240();
     }
 
     protected double speedFactor(){

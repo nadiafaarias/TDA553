@@ -15,6 +15,7 @@ public class Carrier extends Trucks{
         stopEngine();
     }
 
+
     public int getMaxNumberCars() {
         return maxNumberCars;
     }

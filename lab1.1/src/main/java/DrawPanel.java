@@ -20,12 +20,6 @@ public class DrawPanel extends JPanel{
     Map<String, BufferedImage> imageList = new HashMap<>();
 
 
-   /* void moveIt(int x, int y, Car car) {
-        Point point = new Point(x, y);
-        CarController.carPoints.put(car, point);
-    }*/
-
-
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y) {
         this.setDoubleBuffered(true);
@@ -55,7 +49,7 @@ public class DrawPanel extends JPanel{
     // This method is called each time the panel updates/refreshes/repaints itself
     // TODO: Change to suit your needs.
     @Override
-    protected void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
         for(Car car : CarController.cars) {
             for (String key : imageList.keySet()) {

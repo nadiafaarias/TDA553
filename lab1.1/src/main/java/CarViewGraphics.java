@@ -2,6 +2,9 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class CarViewGraphics extends JFrame{
 
@@ -9,15 +12,17 @@ public class CarViewGraphics extends JFrame{
     final int X = 800;
     final int Y = 800;
 
-    //DrawPanel drawPanel = new DrawPanel(X, Y-240);
-
     JPanel controlPanel = new JPanel();
+
+    JPanel carPanel = new JPanel();
 
     JPanel gasPanel = new JPanel();
     JSpinner gasSpinner = new JSpinner();
     int gasAmount = 0;
+    String carModel = "";
     JLabel gasLabel = new JLabel("Amount of gas");
 
+    JLabel carLabel = new JLabel("Select car model");
     JButton gasButton = new JButton("Gas");
     JButton brakeButton = new JButton("Brake");
     JButton turboOnButton = new JButton("Saab Turbo on");
@@ -25,8 +30,13 @@ public class CarViewGraphics extends JFrame{
     JButton liftBedButton = new JButton("Scania Lift Bed");
     JButton lowerBedButton = new JButton("Lower Lift Bed");
 
+    JButton addCar = new JButton("Add car");
+    JButton removeCar = new JButton("Remove car");
+
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
+
+    JSpinner carSpinner = new JSpinner();
     void initComponents(String title, DrawPanel drawPanel) {
 
         this.setTitle(title);
@@ -36,10 +46,8 @@ public class CarViewGraphics extends JFrame{
         this.add(drawPanel);
 
 
-
-        
-
-
+        List<String> carModelNames = Arrays.asList("Random", "Volvo240", "Saab95", "Scania");
+        SpinnerModel spinnerModelCar = new SpinnerListModel(carModelNames);
         SpinnerModel spinnerModel =
                 new SpinnerNumberModel(0, //initial value
                         0, //min
@@ -52,20 +60,35 @@ public class CarViewGraphics extends JFrame{
             }
         });
 
+        carSpinner = new JSpinner(spinnerModelCar);
+        carSpinner.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                carModel = (String) ((JSpinner)e.getSource()).getValue();
+            }
+        });
+
         gasPanel.setLayout(new BorderLayout());
         gasPanel.add(gasLabel, BorderLayout.PAGE_START);
         gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
 
         this.add(gasPanel);
 
+        carPanel.setLayout(new BorderLayout());
+        carPanel.add(carLabel, BorderLayout.PAGE_START);
+        carPanel.add(carSpinner, BorderLayout.PAGE_END);
+
+        this.add(carPanel);
+
         controlPanel.setLayout(new GridLayout(2,4));
 
         controlPanel.add(gasButton, 0);
         controlPanel.add(turboOnButton, 1);
         controlPanel.add(liftBedButton, 2);
-        controlPanel.add(brakeButton, 3);
-        controlPanel.add(turboOffButton, 4);
-        controlPanel.add(lowerBedButton, 5);
+        controlPanel.add(addCar, 3);
+        controlPanel.add(brakeButton, 4);
+        controlPanel.add(turboOffButton, 5);
+        controlPanel.add(lowerBedButton, 6);
+        controlPanel.add(removeCar, 7);
         controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
         this.add(controlPanel);
         controlPanel.setBackground(Color.CYAN);
@@ -73,13 +96,13 @@ public class CarViewGraphics extends JFrame{
 
         startButton.setBackground(Color.blue);
         startButton.setForeground(Color.green);
-        startButton.setPreferredSize(new Dimension(X/5-15,200));
+        startButton.setPreferredSize(new Dimension(X/6-33,200));
         this.add(startButton);
 
 
         stopButton.setBackground(Color.red);
         stopButton.setForeground(Color.black);
-        stopButton.setPreferredSize(new Dimension(X/5-15,200));
+        stopButton.setPreferredSize(new Dimension(X/6-33,200));
         this.add(stopButton);
 
 
