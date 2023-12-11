@@ -46,7 +46,7 @@ public class CarViewGraphics extends JFrame{
         this.add(drawPanel);
 
 
-        List<String> carModelNames = Arrays.asList("Random", "Volvo240", "Saab95", "Scania");
+        List<String> carModelNames = Arrays.asList("Volvo240", "Saab95", "Scania", "Random");
         SpinnerModel spinnerModelCar = new SpinnerListModel(carModelNames);
         SpinnerModel spinnerModel =
                 new SpinnerNumberModel(0, //initial value
