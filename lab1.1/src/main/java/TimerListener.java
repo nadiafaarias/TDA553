@@ -13,7 +13,7 @@ class TimerListener implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        for (Car car : CarController.cars) {
+        for (Car car : CarApplication.cars) {
             if (car.getXCoordinate() < 700 && car.getXCoordinate() > 0) {
                 car.move();
                 CarApplication.frame.drawPanel.repaint();

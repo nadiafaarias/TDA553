@@ -1,4 +1,8 @@
+import java.util.ArrayList;
+
 public class CarApplication {
+
+    public static ArrayList<Car> cars = new ArrayList<>();
 
     static CarController frame;
 
@@ -11,6 +15,14 @@ public class CarApplication {
     public static void main(String[] args) {
         CarApplication instance = new CarApplication();
         instance.initializeApplication();
-
+        cars.add(CarFactory.createVolvo240());
+        cars.add(CarFactory.createSaab95());
+        cars.add(CarFactory.createScania());
+        int y = 0;
+        for (Car car : cars) {
+            car.yCoordinate = y;
+            y += 100;
+        }
     }
+
 }

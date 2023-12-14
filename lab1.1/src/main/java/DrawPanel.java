@@ -51,7 +51,7 @@ public class DrawPanel extends JPanel{
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for(Car car : CarController.cars) {
+        for(Car car : CarApplication.cars) {
             for (String key : imageList.keySet()) {
                 if(Objects.equals(key, car.modelName)) {
                     g.drawImage(imageList.get(key), (int) Math.ceil(car.getXCoordinate()), (int) Math.ceil(car.getYCoordinate()),null);

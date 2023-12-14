@@ -1,6 +1,6 @@
 import java.awt.*;
 
-    public class Saab95 extends Car implements CarFactory{
+    public class Saab95 extends Car{
 
         public boolean turboOn;
 
@@ -25,10 +25,6 @@ import java.awt.*;
             double turbo = 1;
             if(turboOn) turbo = 1.3;
             return enginePower * 0.01 * turbo;
-        }
-
-        public static Car createCar() {
-            return new Saab95();
         }
     }
 

@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Scania extends Trucks implements CarFactory{
+public class Scania extends Trucks{
 
     private double platform;
     public Scania(){
@@ -10,10 +10,6 @@ public class Scania extends Trucks implements CarFactory{
         modelName = "Scania";
         platform = 0;
         stopEngine();
-    }
-
-    public static Car createCar() {
-        return new Scania();
     }
 
     public double getPlatformAngle() {
